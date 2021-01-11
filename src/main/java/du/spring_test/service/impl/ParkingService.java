@@ -4,6 +4,7 @@ import du.spring_test.lib.exceptions.RequiredFieldException;
 import du.spring_test.lib.util.Utils;
 import du.spring_test.model.*;
 import du.spring_test.repository.IParkingDAO;
+import du.spring_test.repository.impl.ParkingDAO;
 import du.spring_test.service.IParkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +24,25 @@ public class ParkingService implements IParkingService {
     }
 
 
+//    @Override
+//    public Parking viewParking(String parkingName) {
+//        ParkingDAO parkingDAO = new ParkingDAO();
+//        parkingDAO.view(parkingName);
+//
+//        Parking parking = new Parking();
+//        List<ParkingArea> parkingAreas = parking.getParkingAreas();
+//        for (ParkingArea parkingArea1 : parkingAreas) {
+//            parkingArea1.getPlaces();
+//        }
+//
+//        return parking;
+
+//    }
+
     @Override
-    public Parking viewParking(String parkingName) {
-        List<Parking> parkings = (List<Parking>) parkingDAO.view(parkingName);
-        return Parking;
+    public Parking getByParkingName(String name) throws Throwable {
+
+        return parkingDAO.getByParkingName(name).orElseThrow(() -> new RuntimeException("Parking not found"));
     }
 
     @Override

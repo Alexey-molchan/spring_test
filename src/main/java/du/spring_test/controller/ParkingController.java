@@ -50,10 +50,34 @@ public class ParkingController {
         return "createParking";
     }
 
-//    @RequestMapping(value = "/parkingsView", method = RequestMethod.GET)
-//    public String parkingView(){
+    @RequestMapping(value = "/showParking", method = RequestMethod.GET)
+    public String showParkingView() {
+        return "showParking";
+    }
+
+
+    @RequestMapping(value = "/showParking", method = RequestMethod.POST)
+    public ModelAndView showParking(@RequestParam String parkingName) {
+        ModelAndView modelAndView = new ModelAndView();
+        try {
+            Parking parking = parkingService.getByParkingName(parkingName);
+            modelAndView.setViewName("parkingView");
+            modelAndView.addObject("parking", parking);
+        }  catch (Throwable throwable) {
+            modelAndView.setViewName("user");
+            modelAndView.addObject("error", throwable.getMessage());
+        }
+        return modelAndView;
+
+    }
+
+//    @RequestMapping(value = "/parkingsView", method = RequestMethod.POST)
+//    public ModelAndView parkingView(@RequestParam String parkingName){
+//        ModelAndView view = new ModelAndView("parkingsView2");
 //        ModelAndView mv;
-//        Parking parking = parkingService.viewParking()
+//        Parking parking = parkingService.viewParking(parkingName);
+//        view.addObject("parking", parking);
+//        return view;
 //    }
 
 
@@ -68,7 +92,7 @@ public class ParkingController {
                                       @RequestParam(name = "SOUTH_places", required = false)Integer sPlaces) {
         try {
             //TODO: create jsp for parking view
-            ModelAndView view = new ModelAndView("parkingsView");
+            ModelAndView view = new ModelAndView("createParking");
             Parking parking = parkingService.createParking(parkingName, north, east, west, south, ePlaces, nPlaces, wPlaces, sPlaces);
             view.addObject("parking", parking);
             return view;

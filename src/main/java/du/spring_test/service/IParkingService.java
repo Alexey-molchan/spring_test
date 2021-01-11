@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 public interface IParkingService {
 
-    Parking viewParking(String parkingName);
+    Parking getByParkingName(String name) throws Throwable;
 
     Parking createParking(String parkingName, String north, String east, String west, String south, Integer ePlaces,
                           Integer nPlaces, Integer wPlaces, Integer sPlaces) throws RequiredFieldException;

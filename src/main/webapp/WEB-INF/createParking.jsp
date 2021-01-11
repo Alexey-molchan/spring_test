@@ -27,7 +27,7 @@
             <%}%>
         </tr>
     </table>
-    <button type="submit">Создать</button>
+    <button type="submit" >Создать</button>
 </form>
 </body>
 </html>
