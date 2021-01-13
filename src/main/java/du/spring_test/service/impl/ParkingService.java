@@ -42,7 +42,7 @@ public class ParkingService implements IParkingService {
     @Override
     public Parking getByParkingName(String name) throws Throwable {
 
-        return parkingDAO.getByParkingName(name).orElseThrow(() -> new RuntimeException("Parking not found"));
+        return parkingDAO.getByParkingName(name);
     }
 
     @Override

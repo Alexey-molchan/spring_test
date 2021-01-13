@@ -6,31 +6,33 @@
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/parkingsView" method="post">
-    <p>
-        Enter Parking name: <input type="text" name="parkingName">
-    </p>
-    <p>
-        <input type="submit">
-    </p>
 </form>
 <h3>Название Вашей парковки</h3>
 <h4>${parking.name} </h4>
 <table border='1px'>
-<tr>
-    <th>Side</th>
-    <th>Places</th>
-</tr>
-<c:forEach var="area" items="${parking.parkingAreas}">
-    <tr>
-    <td><c:out value="${area.side}"/></td>
-    <c:forEach var="place" items="${area.places}">
-        <p>
-        <td><c:out value="${place.number}"/></td>
-        </p>
+    <thead>
+        <tr>
+            <th>Side</th>
+            <th>Places</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach var="area" items="${parking.parkingAreas}">
+            <tr>
+                <td><c:out value="${area.side}"/></td>
+                <td>
+                    <c:forEach varStatus="loop" var="place" items="${area.places}">
+                        <span>
+                            <c:out value="${place.number}"/>
+                            <c:if test="${loop.index + 1 != area.places.size()}">,</c:if>
+                        </span>
+                    </c:forEach>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
 
-    </c:forEach>
-</c:forEach>
-    </tr>
+
 </table>
 </body>
 </html>

@@ -58,13 +58,13 @@ public class ParkingController {
 
     @RequestMapping(value = "/showParking", method = RequestMethod.POST)
     public ModelAndView showParking(@RequestParam String parkingName) {
-        ModelAndView modelAndView = new ModelAndView();
+        ModelAndView modelAndView = new ModelAndView("parkingsView");
         try {
             Parking parking = parkingService.getByParkingName(parkingName);
-            modelAndView.setViewName("parkingView");
+            modelAndView.setViewName("parkingsView");
             modelAndView.addObject("parking", parking);
         }  catch (Throwable throwable) {
-            modelAndView.setViewName("user");
+            modelAndView.setViewName("parkingsView");
             modelAndView.addObject("error", throwable.getMessage());
         }
         return modelAndView;
@@ -92,7 +92,7 @@ public class ParkingController {
                                       @RequestParam(name = "SOUTH_places", required = false)Integer sPlaces) {
         try {
             //TODO: create jsp for parking view
-            ModelAndView view = new ModelAndView("createParking");
+            ModelAndView view = new ModelAndView("parkingsView");
             Parking parking = parkingService.createParking(parkingName, north, east, west, south, ePlaces, nPlaces, wPlaces, sPlaces);
             view.addObject("parking", parking);
             return view;
